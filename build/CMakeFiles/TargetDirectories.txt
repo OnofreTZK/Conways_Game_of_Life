@@ -1,3 +1,0 @@
-/home/rafael/Documents/class/lp1/canvas-life-game/build/CMakeFiles/rebuild_cache.dir
-/home/rafael/Documents/class/lp1/canvas-life-game/build/CMakeFiles/canvas.dir
-/home/rafael/Documents/class/lp1/canvas-life-game/build/CMakeFiles/edit_cache.dir

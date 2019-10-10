@@ -8,9 +8,14 @@ include_directories(include)
 set (CMAKE_CXX_STANDARD 14)
 
 #However, the file (Glob...) allows for wildcard additions:
-file(GLOB SOURCES "src/*.cpp")
+set(SOURCES src/canvas.cpp src/lodepng.cpp src/driver_canvas)
+set(SOURCESLIFE src/main.cpp)
+
+#file(GLOB SOURCES "src/*.cpp")
 
 add_executable(canvas ${SOURCES})
+add_executable(life ${SOURCESLIFE})
+
 
 #To create cmake inside the build folder when its not working in tradicional methods
 #cmake -S . -Bbuild
