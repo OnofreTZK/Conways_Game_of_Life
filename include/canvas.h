@@ -31,10 +31,19 @@ namespace life {
      */
     class Canvas
     {
+
         public:
             //=== Alias
             typedef unsigned char component_t; //!< Type of a color channel.
             static constexpr int image_depth=4; //!< Default value is RGBA (4 channels).
+
+        private:
+            size_t m_width;    //!< The image width in pixel units.
+            size_t m_height;   //!< The image height in pixel units.
+            short m_block_size; //!< The virtual pixel size in pixels
+            // TODO: If you wish to use a 3D matrix instead of an array, this is where
+            // you should replace the vector with the 3D matrix.
+            vector< component_t > m_pixels; //!< The pixels, stored as 4 RGBA components.
 
         public:
 
@@ -116,13 +125,7 @@ namespace life {
             const component_t* pixels( void ) const
             { return m_pixels.data(); }
 
-        private:
-            size_t m_width;    //!< The image width in pixel units.
-            size_t m_height;   //!< The image height in pixel units.
-            short m_block_size; //!< The virtual pixel size in pixels
-            // TODO: If you wish to use a 3D matrix instead of an array, this is where
-            // you should replace the vector with the 3D matrix.
-            vector< component_t > m_pixels; //!< The pixels, stored as 4 RGBA components.
+        
     };
 } // namespace
 
