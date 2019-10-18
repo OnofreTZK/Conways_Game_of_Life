@@ -14,7 +14,7 @@ set(SOURCESLIFE src/main.cpp)
 #file(GLOB SOURCES "src/*.cpp")
 
 add_executable(canvas ${SOURCES})
-add_executable(life ${SOURCESLIFE})
+add_executable(glife ${SOURCESLIFE})
 
 
 #To create cmake inside the build folder when its not working in tradicional methods
