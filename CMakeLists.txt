@@ -9,12 +9,12 @@ set (CMAKE_CXX_STANDARD 14)
 
 #However, the file (Glob...) allows for wildcard additions:
 set(SOURCES src/canvas.cpp src/lodepng.cpp src/driver_canvas)
-set(SOURCESLIFE src/main.cpp)
+set(SOURCESLIFE src/main.cpp src/help.cpp)
 
 #file(GLOB SOURCES "src/*.cpp")
 
 add_executable(canvas ${SOURCES})
-add_executable(life ${SOURCESLIFE})
+add_executable(glife ${SOURCESLIFE})
 
 
 #To create cmake inside the build folder when its not working in tradicional methods
