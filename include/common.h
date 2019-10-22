@@ -101,7 +101,7 @@ namespace life {
                                   G=1, //!< Green channel.
                                   B=2, //!< Blue channel
                                   A=3  //!< Alpha channel
-       };
+       };  
 
        /// the color depth
        static constexpr short N_CHANNELS = 4;
@@ -110,24 +110,28 @@ namespace life {
        color_t channels[N_CHANNELS]; //!< Stores each of the color channels, R, G, and B.
        //=== Methods
        /// Creates a color.
-       Color( color_t r=0, color_t g=0, color_t b=0, color_t a=0 ) : channels{r,g,b,a} {/*empty*/}
+       Color(color_t r=0, color_t g=0, color_t b=0, color_t a=0) : channels{r,g,b,a} {/*empty*/}
+
        /// Copy constructor.
        Color( const Color& clone )
        {
            std::memcpy( channels, clone.channels, sizeof(color_t)*N_CHANNELS );
        }
+
        /// Assignment operator.
-       Color& operator=( const Color& rhs )
+       Color& operator = ( const Color& rhs )
        {
            if ( &rhs != this )
                std::memcpy( channels, rhs.channels, sizeof(color_t)*N_CHANNELS );
            return *this;
        }
+
        /// Comparison operator.
-       bool operator==( const Color& rhs )
+       bool operator == ( const Color& rhs )
        {
            return not std::memcmp( channels, rhs.channels, sizeof(color_t)*N_CHANNELS );
        }
+       
        friend std::ostream& operator<<( std::ostream& os, const Color& c )
        {
            os << "(" << (int)c.channels[R] << ","
@@ -139,20 +143,20 @@ namespace life {
    };
 
    // A basic color pallete.
-   static const Color BLACK         = Color{0,0,0}      ; //!< Black.
-   static const Color WHITE         = Color{255,255,255}; //!< White.
-   static const Color DARK_GREEN    = Color{0,100,0}    ; //!< Dark green.
-   static const Color GREEN         = Color{0,250,0}    ; //!< Green.
-   static const Color RED           = Color{255,0,0}    ; //!< Red.
-   static const Color BLUE          = Color{0,0,255}    ; //!< Blue.
-   static const Color CRIMSON       = Color{220,20,60}  ; //!< Crimson (kind of red).
-   static const Color LIGHT_BLUE    = Color{135,206,250}; //!< Light blue.
-   static const Color LIGHT_GREY    = Color{210,210,210}; //!< Light blue.
-   static const Color DEEP_SKY_BLUE = Color{0,191,255}  ; //!< Deep blue.
-   static const Color DODGER_BLUE   = Color{30,144,255} ; //!< Another bluish color.
-   static const Color STEEL_BLUE    = Color{70,130,180} ; //!< Yet another bluish color.
-   static const Color YELLOW        = Color{255,255,0}  ; //!< Yellow.
-   static const Color LIGHT_YELLOW  = Color{255,255,153}; //!< Light yellow.
+   static const Color BLACK         = Color{0,0,0, 255}      ; //!< Black.
+   static const Color WHITE         = Color{255,255,255, 255}; //!< White.
+   static const Color DARK_GREEN    = Color{0,100,0, 255}    ; //!< Dark green.
+   static const Color GREEN         = Color{0,250,0, 255}    ; //!< Green.
+   static const Color RED           = Color{255,0,0, 255}    ; //!< Red.
+   static const Color BLUE          = Color{0,0,255, 255}    ; //!< Blue.
+   static const Color CRIMSON       = Color{220,20,60, 255}  ; //!< Crimson (kind of red).
+   static const Color LIGHT_BLUE    = Color{135,206,250, 255}; //!< Light blue.
+   static const Color LIGHT_GREY    = Color{210,210,210, 255}; //!< Light blue.
+   static const Color DEEP_SKY_BLUE = Color{0,191,255, 255}  ; //!< Deep blue.
+   static const Color DODGER_BLUE   = Color{30,144,255, 255} ; //!< Another bluish color.
+   static const Color STEEL_BLUE    = Color{70,130,180, 255} ; //!< Yet another bluish color.
+   static const Color YELLOW        = Color{255,255,0, 255}  ; //!< Yellow.
+   static const Color LIGHT_YELLOW  = Color{255,255,153, 255}; //!< Light yellow.
 
    /// A color palette for later use.
    static std::map< std::string, Color > color_pallet{

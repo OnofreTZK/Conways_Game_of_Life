@@ -10,10 +10,11 @@ using std::vector;
 
 #include "common.h"
 
-namespace life {
+namespace life
+{
 
-    //! Provides methods for drawing on an image.
-    /*!
+//! Provides methods for drawing on an image.
+/*!
      * This is a drawing area on which we shall draw a Life representation.
      *
      * Here some information on the canvas properties:
@@ -29,104 +30,213 @@ namespace life {
      * This class returns to the client an image (object) representation of the maze,
      * which might be recorded by the client as a PNG image file.
      */
-    class Canvas
-    {
+class Canvas
+{
 
-        public:
-            //=== Alias
-            typedef unsigned char component_t; //!< Type of a color channel.
-            static constexpr int image_depth=4; //!< Default value is RGBA (4 channels).
+public:
+    //=== Alias
+    typedef unsigned char component_t;    //!< Type of a color channel.
+    static constexpr int image_depth = 4; //!< Default value is RGBA (4 channels).
 
-        private:
-            size_t m_width;    //!< The image width in pixel units.
-            size_t m_height;   //!< The image height in pixel units.
-            short m_block_size; //!< The virtual pixel size in pixels
-            // TODO: If you wish to use a 3D matrix instead of an array, this is where
-            // you should replace the vector with the 3D matrix.
-            vector< component_t > m_pixels; //!< The pixels, stored as 4 RGBA components.
+private:
+    size_t m_col;       //!< The image width in pixel units.
+    size_t m_row;       //!< The image height in pixel units.
+    long total_size{0};
+    short m_block_size; //!< The virtual pixel size in pixels
+    // TODO: If you wish to use a 3D matrix instead of an array, this is where
+    // you should replace the vector with the 3D matrix.
+    vector<vector<life::Color>> m_pixels; //!< The pixels, stored as 4 RGBA components.
+    vector<component_t> m_pixel_unidimensional;
 
-        public:
-
-            //=== Special members
-            /// Constructor
-            /*! Creates an empty canvas of the requested size.
+public:
+    //=== Special members
+    /// Constructor
+    /*! Creates an empty canvas of the requested size.
              * @param w_ The canvas width in pixels.
              * @param h_ The canvas height in pixels.
              */
-            Canvas( size_t w=0, size_t h=0, short bs=4 )
-                : m_width{w*bs}, m_height{h*bs}, m_block_size{ bs }
-            {
-                // Remember to adjust the virtual size to real dimensions.
-                m_pixels.resize( m_width * m_height * image_depth );
-            }
+    Canvas(size_t col = 0, size_t row = 0, short bs = 4)
+        : m_row{row * bs}, m_col{col * bs}, m_block_size{bs}
+    {
+        // Remember to adjust the virtual size to real dimensions.
+        // std::cout << "m_col * m_row = " << m_col * m_row * m_block_size<< std::endl;
+        m_pixels.resize(m_row);
+        for (int i = 0; i < m_row; i++)
+        {
+            m_pixels[i].resize(m_col);
+        }
+        total_size = m_row * m_col * 4;
+    }
 
-            /// Destructor.
-            virtual ~Canvas( void )
-            {
-                // Do nothing, RAII (resource acquisition is resource initialization) approach
-            }
+    /// Destructor.
+    ~Canvas(void)
+    {
+    }
 
-            //=== Special members
-            /// Copy constructor.
-            /*!
+    //=== Special members
+    /// Copy constructor.
+    /*!
              * Deep copy of the canvas.
              * @param clone The object we are copying from.
              */
-            Canvas( const Canvas & );
-            /// Assignment operator.
-            /*!
+    Canvas(const Canvas &);
+    /// Assignment operator.
+    /*!
              * @param source The object we are copying information from.
              * @return A reference to the `this` object.
              */
-            Canvas & operator=( const Canvas & );
-            /// Move constructor.
-            /*!
+    Canvas &operator=(const Canvas &);
+    /// Move constructor.
+    /*!
              * @param clone The object we are move-constructing from.
              */
-            Canvas( Canvas && clone );
-            /// Move assignment operator.
-            /*!
+    Canvas(Canvas &&clone);
+    /// Move assignment operator.
+    /*!
              * @param source The object we are move-assigning from.
              */
-            Canvas & operator=( Canvas && );
+    Canvas &operator=(Canvas &&);
 
-            //=== Members
-            /// Clear the canvas with black color.
-            /*!
+    //=== Members
+    /// Clear the canvas with black color.
+    /*!
              * @param The color we assign to all pixels.
              */
-            void clear( const Color& = BLACK );
-            /// Set the color of a pixel on the canvas.
-            /*!
+    void clear(const Color& choosed_color = BLACK)
+    {
+        for (int i = 0; i < m_row; ++i)
+        {
+            for (int j = 0; j < m_col; ++j)
+            {
+                for (int k = 0; k < 4; k++)
+                {
+                    m_pixels[i][j].channels[k] = choosed_color.channels[k];
+                }
+            }
+        }
+    };
+    /// Set the color of a pixel on the canvas.
+    /*!
              * Assign a color to a pixel on the virtual image at the requested coordinate.
              *
              * @note Nothing is done if the  pixel coordinate is located outside the canvas.
              * @param p The 2D (virtual) coordinate of the pixel we want to change the color.
              * @param c The color.
              */
-            void pixel( const Point2&,  const Color& );
+    void pixel(const Point2& point, const Color & choosed_color){
+        Point2 n_point = convert_pixel(point);
 
-            /// Get the pixel color from the canvas.
-            /*!
+        for (int i = n_point.x; i < n_point.x + m_block_size; i++){
+            for (int j = n_point.y; j < n_point.y + m_block_size; j++){
+                for (int k = 0; k < 4; k++)
+                {
+                    m_pixels[i][j].channels[k] = choosed_color.channels[k];
+                }
+            }
+        }   
+    };
+
+    /// Get the pixel color from the canvas.
+    /*!
              * @throw `std::invalid_argument()` it the pixel coordinate is located outside the canvas.
              * @param p The 2D (virtual) coordinate of the pixel we want to know the color of.
              * @return The pixel color.
              */
-            Color pixel( const Point2& ) const;
-
-            //=== Attribute accessors members.
-            /// Return the canvas width.
-            size_t width( void ) const
-            { return m_width; }
-            /// Return the canvas height.
-            size_t height( void ) const
-            { return m_height; }
-            /// Return the canvas pixels, as an unidimensional array of `unsigned char`.
-            const component_t* pixels( void ) const
-            { return m_pixels.data(); }
-
-        
+    Color pixel(const Point2 & point) {
+        Point2 n_point = convert_pixel(point);
     };
-} // namespace
+
+    //=== Attribute accessors members.
+    /// Return the canvas width.
+    size_t col(void) const
+    {
+        return m_col;
+    }
+    /// Return the canvas height.
+    size_t row(void) const
+    {
+        return m_row;
+    }
+    
+    /// Return the canvas pixels, as an unidimensional array of `unsigned char`.
+    const component_t* pixels( void )
+    { 
+        int count{0};
+        int progress{0};
+
+        for(int i = 0; i < m_row; i++){
+            for(int j = 0; j < m_col; j++){
+                for (int k = 0; k < 4; k++)
+                {
+                    // std::cout << "\runidimensional = " << count++;
+                    progress_bar(count++);
+                    m_pixel_unidimensional.push_back(m_pixels[i][j].channels[k]);
+                }
+            }
+        }
+        return m_pixel_unidimensional.data(); 
+    }
+
+    //!< Create progress bar based on input value
+    template <typename T>
+    void progress_bar(T value){
+        long x = ((value+1) * 100)/total_size;
+        
+        if(value == 0){
+            std::cout<<"----------------Creating ppm file------------------\n";
+        }
+        std::cout.flush();
+        std::cout << "[";
+        for(int i = 0; i < 50; i++){
+            if(i < (x/2) ){
+                std::cout <<"*";
+            }else{
+                std::cout << " ";
+            }
+        }
+        std::cout << "] " << x << "%\r";
+        std::cout.flush();
+
+        if(x == 100){
+            std::cout<<"\nSaving ppm image...\n";
+        }
+    }
+
+    const size_t get_size()
+    { 
+        return total_size; 
+    }
+
+    void print(){
+        for (int i = 0; i < m_row; ++i)
+        {
+            std::cout << "line: " << i << std::endl;
+            for (int j = 0; j < m_col; ++j)
+            {
+                std::cout << "{"; 
+                for (int k = 0; k < 4; k++)
+                {
+                    std::cout << (int) m_pixels[i][j].channels[k] << " ";
+                }
+                std::cout << "} "; 
+            }
+            std::cout << std::endl;
+        }
+    }
+
+    //!> Return new points
+    Point2 convert_pixel(const Point2& point){
+        Point2 n_point;
+        
+        //change origin from left top to left bottom
+        n_point.x = (m_row / m_block_size) - 1 - point.x;
+
+        n_point.x = n_point.x * m_block_size;
+        n_point.y = point.y * m_block_size;
+
+        return n_point;
+    }
+};
+} // namespace life
 
 #endif // CANVAS_H
