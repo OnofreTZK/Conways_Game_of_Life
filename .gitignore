@@ -1,3 +1,7 @@
 # Don't track content of these folders
 build/
 *.swp
+test.cpp
+teste
+teste2.cpp
+.vscode
