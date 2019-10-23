@@ -1,7 +1,7 @@
 # Don't track content of these folders
 build/
 *.swp
+<<<<<<< HEAD
 test.cpp
 teste
 teste2.cpp
-.vscode
