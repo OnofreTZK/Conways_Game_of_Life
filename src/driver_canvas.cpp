@@ -40,14 +40,14 @@ bool save_ppm3( const unsigned char * data, size_t w, size_t h, size_t d,  const
 // Example 1
 // Encode from raw pixels to disk with a single function call
 // The image argument has width * height RGBA pixels or width * height * 4 bytes
-// void encode_png(const char* filename, const unsigned char * image, unsigned width, unsigned height)
-// {
-//     //Encode the image
-//     unsigned error = lodepng::encode(filename, image, width, height);
+void encode_png(const char* filename, const unsigned char * image, unsigned width, unsigned height)
+{
+    //Encode the image
+    unsigned error = lodepng::encode(filename, image, width, height);
 
-//     //if there's an error, display it
-//     if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
-// }
+    //if there's an error, display it
+    if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
+}
 
 // Saves image to filename given as argument. Warning, this overwrites the file without warning!
 int main(int argc, char *argv[])
@@ -81,9 +81,9 @@ int main(int argc, char *argv[])
     }
     
     image.pixel( Point2{0,0}, color_pallet["green"] );
-    // image.pixel( Point2{14,19}, color_pallet["green"] );
+    //image.pixel( Point2{14,19}, color_pallet["green"] );
     
-    // encode_png(filename, image.pixels(), image.col(), image.row() );
+    encode_png(filename, image.pixels(), image.col(), image.row() );
     save_ppm3( image.pixels(), image.col(), image.row(), 4, "test.ppm");
 
     
