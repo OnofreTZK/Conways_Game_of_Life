@@ -5,6 +5,7 @@
 #include <string> // STL string library( file and paths manip )
 #include <vector> // STL vector library( initial config board )
 #include <cassert>
+#include <cstring>
 
 /*
 ===============================
@@ -20,24 +21,6 @@ using std::cout;
 using std::cin;
 //ALIAS for STL vector
 using std::vector;
-
-
-//==========================================================================================
-// Variables for options.
-//==========================================================================================
-struct Options{
-    std::string imgdirpath; // image directory name.
-    size_t maxgen; // number of generations.
-    size_t fps; // generations presented per second.
-    size_t pixel_size; // cell size in image( pixel size ).
-    std::string bkgcolor; // background color name.
-    std::string alivecolor; // alive cells color name.
-    std::string outfile; // filename for representation of the simulation.
-    std::string configFile; // initial config filename.
-    vector< vector< char > > starter_config; // matrix for initial configuration;
-};
-//==========================================================================================
-
 
 
 int main( int argc, char const *argv[] )
