@@ -8,8 +8,8 @@ include_directories(include)
 set (CMAKE_CXX_STANDARD 14)
 
 #However, the file (Glob...) allows for wildcard additions:
-set(SOURCES src/canvas.cpp src/lodepng.cpp src/driver_canvas)
-set(SOURCESLIFE src/main.cpp)
+set(SOURCES src/canvas.cpp src/lodepng.cpp src/driver_canvas.cpp)
+set(SOURCESLIFE src/main.cpp src/help.cpp)
 
 #file(GLOB SOURCES "src/*.cpp")
 
