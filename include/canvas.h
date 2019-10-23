@@ -148,6 +148,8 @@ public:
 
     //=== Attribute accessors members.
     /// Return the canvas width.
+
+    //remove this comment
     size_t col(void) const
     {
         return m_col;
