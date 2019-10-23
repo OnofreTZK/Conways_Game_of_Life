@@ -61,14 +61,14 @@ int main(int argc, char *argv[])
 
     // Criar uma imagem para desenho.
     Canvas image( width, height, block_size );
-
-    for ( auto x{0u} ; x < width ; x++ )
-        for ( auto y{0u} ; y < height ; y++ )
+    // image.clear(DEEP_SKY_BLUE);
+    for ( auto x{0u} ; x < height ; x++ ){
+        for ( auto y{0u} ; y < width ; y++ )
         {
             if ( y % 2 )
                 if ( ! (x % 2) )
                     // another way to define a color.
-                    image.pixel( Point2{x,y} , color_pallet["deep_sky_blue"] );
+                    image.pixel( Point2{x,y} , DEEP_SKY_BLUE );
                     //image.pixel( Point2(x,y) , DEEP_SKY_BLUE );
                 else
                     image.pixel( Point2{x,y} , RED );
@@ -78,8 +78,16 @@ int main(int argc, char *argv[])
                 else
                     image.pixel( Point2{x,y} , DEEP_SKY_BLUE );
         }
+    }
+    
     image.pixel( Point2{0,0}, color_pallet["green"] );
+    //image.pixel( Point2{14,19}, color_pallet["green"] );
+    
+    encode_png(filename, image.pixels(), image.col(), image.row() );
+    save_ppm3( image.pixels(), image.col(), image.row(), 4, "test.ppm");
 
-    encode_png(filename, image.pixels(), image.width(), image.height() );
-    save_ppm3( image.pixels(), image.width(), image.height(), 4, "test.ppm");
+    
+    std::cout << "PPM image created!\n";
+    return 0;
+    
 }
