@@ -200,11 +200,11 @@ void readFile( Options & arguments )
     //===========================================================================================
 
 
-    // Allocating vector===============
+    // Allocating vector========================================
     std::vector< char > mat_col;
     mat_col.resize( arguments.nCol );
     arguments.starter_config.resize( arguments.nLin, mat_col );
-    //=================================
+    //==========================================================
 
     for( int i = 0; i < arguments.nLin; i++ )
     {
