@@ -19,21 +19,20 @@ Tiago Onofre and Rafael Fortunato.
 //ALIAS for in/out streams.
 using std::cout;
 using std::cin;
-//ALIAS for STL vector
-using std::vector;
-
 
 int main( int argc, char const *argv[] )
 {
+    // Struct with arguments data.
     Options arguments;
 
     if( processing_arguments( arguments, argc, argv ) )
     {
-        cout << "Get data [ OK ]\n"; // need improvement
+        printGen( arguments );
+        cout << "\n\x1b[32m[ OK ]\x1b[0m Get data \n"; // need improvement
     }
     else
     {
-        cout << "Get data [ FAILED ]\n"; // need improvement
+        cout << "\n\x1b[31m[ FAILED ]\x1b[0m Get data \n"; // need improvement
         return EXIT_FAILURE;
     }
 

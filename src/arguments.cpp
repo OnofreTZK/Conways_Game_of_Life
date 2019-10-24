@@ -1,5 +1,7 @@
 #include "../include/arguments.h"
-
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
 
 // print help menu.
 void printHelp()
@@ -51,7 +53,7 @@ bool filename_verification( char const & filename )
             }
         }
     }
-    
+
     return false;
 
 }
@@ -77,12 +79,16 @@ bool processing_arguments( Options & arguments, int argc, char const *argv[] )
     {
         printHelp();
 
-        return true;
+        return false;
     }
     // verify if second argument is a valid file.
     if( ( argc == 2 ) and ( filename_verification( *argv[1] ) == true )  )
     {
-        //read file function TODO.
+        arguments.configFile = argv[1];
+
+        readFile( arguments );
+
+        return true;
     }
     else if( ( argc == 2 ) and ( filename_verification( *argv[1] ) == false )  )
     {
@@ -156,6 +162,92 @@ bool processing_arguments( Options & arguments, int argc, char const *argv[] )
     }
 
     return true;
+}
+
+
+void readFile( Options & arguments )
+{
+    std::cout << "\n>>>Opening input file [" << arguments.configFile << "]...\n";
+
+    std::ifstream inFile;
+
+    inFile.open(arguments.configFile);
+
+    // Opening verification =====================================================================
+    if(!inFile)
+    {
+        std::cerr << "Unable to open file! "
+                  << "Please certify you given the correct directory path to "
+                  << "a valid config file( .dat or .txt )\n";
+        exit(1);
+    }
+    //===========================================================================================
+    std::cout << ">>>\x1b[92mSuccessfully opened!\x1b[0m\n";
+
+    //===========================================================================================
+    //Config Variables
+    //===========================================================================================
+
+    inFile >> arguments.nLin;
+    inFile >> arguments.nCol;
+
+    std::cout << ">>>Grid size read from input file: "
+              << arguments.nLin << " rows by " << arguments.nCol << " cols.\n";
+
+    inFile >> arguments.aliveCell;
+    std::cout << ">>>Character that represents a living cell from input file: '" 
+              << arguments.aliveCell << "'.\n";
+    //===========================================================================================
+
+
+    // Allocating vector===============
+    std::vector< char > mat_col;
+    mat_col.resize( arguments.nCol );
+    arguments.starter_config.resize( arguments.nLin, mat_col );
+    //=================================
+
+    for( int i = 0; i < arguments.nLin; i++ )
+    {
+        for( int j = 0; j < arguments.nCol; j++ )
+        {
+            inFile >> arguments.starter_config[i][j];
+
+            if( arguments.starter_config[i][j] == ' ' )
+            {
+                arguments.starter_config[i][j] = '.';
+            }
+
+        }
+    }
+
+    inFile.close();
+
+}
+
+
+// temporary function -- must be in a method.
+void printGen( Options & arguments )
+{
+    std::cout << "\n\n";
+
+    for( int i = 0; i < arguments.nLin; i++ )
+    {
+        std::cout << "[";
+
+        for( int j = 0; j < arguments.nCol; j++ )
+        {
+            std::cout << arguments.starter_config[i][j] << "";
+
+            if( arguments.starter_config[i][j] == '.' )
+            {
+                continue;
+            }
+
+        }
+
+        std::cout << "]" << std::endl;
+    }
+
 }
 
 
