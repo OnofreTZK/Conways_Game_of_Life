@@ -1,7 +1,9 @@
 #include "../include/arguments.h"
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <cstdlib>
+#include <iterator>
 
 // print help menu.
 void printHelp()
@@ -199,25 +201,28 @@ void readFile( Options & arguments )
               << arguments.aliveCell << "'.\n";
     //===========================================================================================
 
-
-    // Allocating vector========================================
-    std::vector< char > mat_col;
-    mat_col.resize( arguments.nCol );
+    // Allocating vector======================================
+    std::vector<char>  mat_col( arguments.nCol );
     arguments.starter_config.resize( arguments.nLin, mat_col );
-    //==========================================================
+    //========================================================
+
+    std::string buffer;
+
+    char cell;
 
     for( int i = 0; i < arguments.nLin; i++ )
     {
+        std::getline( inFile, buffer );
+
         for( int j = 0; j < arguments.nCol; j++ )
         {
-            inFile >> arguments.starter_config[i][j];
 
-            if( arguments.starter_config[i][j] == ' ' )
+            if( buffer[j] == arguments.aliveCell )
             {
-                arguments.starter_config[i][j] = '.';
+                arguments.starter_config[i][j] = buffer[j];
             }
-
         }
+
     }
 
     inFile.close();
@@ -236,12 +241,12 @@ void printGen( Options & arguments )
 
         for( int j = 0; j < arguments.nCol; j++ )
         {
-            std::cout << arguments.starter_config[i][j] << "";
-
-            if( arguments.starter_config[i][j] == '.' )
+            if( arguments.starter_config[i][j] != arguments.aliveCell )
             {
-                continue;
+                std::cout << " ";
             }
+            else
+                std::cout << arguments.starter_config[i][j];
 
         }
 

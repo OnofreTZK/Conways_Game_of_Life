@@ -22,7 +22,7 @@ struct Options{
     std::string configFile; // initial config filename.
     size_t nLin; // number of rows( config ).
     size_t nCol; // number of columns( config ).
-    std::string aliveCell; // alive cell character.
+    char aliveCell; // alive cell character.
     std::vector< std::vector< char > > starter_config; // matrix for initial configuration;
 };
 //==========================================================================================
