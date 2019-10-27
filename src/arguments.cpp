@@ -1,9 +1,4 @@
 #include "../include/arguments.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <cstdlib>
-#include <iterator>
 
 // print help menu.
 void printHelp()
@@ -61,7 +56,6 @@ bool filename_verification( char const & filename )
 }
 
 
-
 bool processing_arguments( Options & arguments, int argc, char const *argv[] )
 {
     if( argc < 2 ) // min arguments.
@@ -109,6 +103,8 @@ bool processing_arguments( Options & arguments, int argc, char const *argv[] )
                     if( filename_verification( *argv[i] ) == true ) // verify a valid filename.
                     {
                         arguments.configFile = argv[i];
+
+                        readFile( arguments );
                     }
                     else if( ( filename_verification( *argv[i] ) == false ) and ( i == argc - 1 ) )
                     {
@@ -122,6 +118,7 @@ bool processing_arguments( Options & arguments, int argc, char const *argv[] )
                     }
                 }
             }
+
 
             if( strcmp( argv[i], "--imgdir" ) == 0 )
             {
@@ -156,7 +153,6 @@ bool processing_arguments( Options & arguments, int argc, char const *argv[] )
             if( strcmp( argv[i], "--outfile" ) == 0 )
             {
                 arguments.outfile = argv[i+1];
-                std::cout << "output file = " << arguments.outfile << "\n";
             }
 
 
@@ -208,18 +204,17 @@ void readFile( Options & arguments )
 
     std::string buffer;
 
-    char cell;
-
+    /* Parser to get alive cells positions */
     for( int i = 0; i < arguments.nLin; i++ )
     {
-        std::getline( inFile, buffer );
+        std::getline( inFile, buffer ); // pass to a string.
 
         for( int j = 0; j < arguments.nCol; j++ )
         {
-
-            if( buffer[j] == arguments.aliveCell )
+            if( buffer[j] == arguments.aliveCell ) // processing each char of the string.
             {
                 arguments.starter_config[i][j] = buffer[j];
+                arguments.coordinates.push_back( std::make_pair( i, j ) );
             }
         }
 
@@ -250,8 +245,17 @@ void printGen( Options & arguments )
 
         }
 
-        std::cout << "]" << std::endl;
+         std::cout << "]" << std::endl;
     }
+
+    std::cout << "\n\n[ ";
+    for( const auto & i : arguments.coordinates )
+    {
+      std::cout << "(" 
+                << i.first << ", " 
+                << i.second << ") "; 
+    }
+    std::cout << "]\n";
 
 }
 
