@@ -1,7 +1,7 @@
 #ifndef HELP_H
 #define HELP_H
 
-#include "./classes.h"
+#include "./life_game.h"
 
 // help menu.
 void printHelp();
@@ -16,7 +16,7 @@ bool processing_arguments( Options & arguments, int argc, char const *argv[] );
 void readFile( Options & arguments );
 
 // Show generation in terminal.
-void printGen( Options & arguments );
+// void printGen( Options & arguments );
 
 
 #endif

@@ -1,4 +1,5 @@
 #include "../include/arguments.h"
+#include "../include/life_game.h"
 
 #include <cstdlib> //size_t
 #include <iostream> // STL general( std:: )
@@ -27,7 +28,14 @@ int main( int argc, char const *argv[] )
 
     if( processing_arguments( arguments, argc, argv ) )
     {
-        printGen( arguments );
+        life::LifeConfig firstman(arguments);
+        firstman.PrintTable();
+        firstman.RefreshGeneration();
+        firstman.PrintTable();
+       
+        // firstman.printtable();
+        
+
         cout << "\n\x1b[32m[ OK ]\x1b[0m Get data \n"; // need improvement
     }
     else
