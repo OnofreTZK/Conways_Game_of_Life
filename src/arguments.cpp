@@ -226,38 +226,38 @@ void readFile( Options & arguments )
 
 
 // temporary function -- must be in a method.
-void printGen( Options & arguments )
-{
-    std::cout << "\n\n";
+// void printGen( Options & arguments )
+// {
+//     std::cout << "\n\n";
 
-    for( int i = 0; i < arguments.nLin; i++ )
-    {
-        std::cout << "[";
+//     for( int i = 0; i < arguments.nLin; i++ )
+//     {
+//         std::cout << "[";
 
-        for( int j = 0; j < arguments.nCol; j++ )
-        {
-            if( arguments.starter_config[i][j] != arguments.aliveCell )
-            {
-                std::cout << " ";
-            }
-            else
-                std::cout << arguments.starter_config[i][j];
+//         for( int j = 0; j < arguments.nCol; j++ )
+//         {
+//             if( arguments.starter_config[i][j] != arguments.aliveCell )
+//             {
+//                 std::cout << " ";
+//             }
+//             else
+//                 std::cout << arguments.starter_config[i][j];
 
-        }
+//         }
 
-         std::cout << "]" << std::endl;
-    }
+//          std::cout << "]" << std::endl;
+//     }
 
-    std::cout << "\n\n[ ";
-    for( const auto & i : arguments.coordinates )
-    {
-      std::cout << "(" 
-                << i.first << ", " 
-                << i.second << ") "; 
-    }
-    std::cout << "]\n";
+//     std::cout << "\n\n[ ";
+//     for( const auto & i : arguments.coordinates )
+//     {
+//       std::cout << "(" 
+//                 << i.first << ", " 
+//                 << i.second << ") "; 
+//     }
+//     std::cout << "]\n";
 
-}
+// }
 
 
 
