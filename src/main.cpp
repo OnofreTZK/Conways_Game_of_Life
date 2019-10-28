@@ -32,9 +32,8 @@ int main( int argc, char const *argv[] )
         firstman.PrintTable();
         firstman.RefreshGeneration();
         firstman.PrintTable();
-       
         // firstman.printtable();
-        
+
 
         cout << "\n\x1b[32m[ OK ]\x1b[0m Get data \n"; // need improvement
     }

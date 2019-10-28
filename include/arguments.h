@@ -10,14 +10,10 @@ void printHelp();
 bool filename_verification( char const & filename );
 
 // Arguments processing.
-bool processing_arguments( Options & arguments, int argc, char const *argv[] );
+bool processing_arguments( Options & arguments, int argc, char *argv[] );
 
 // Read initial config file.
 void readFile( Options & arguments );
-
-// Show generation in terminal.
-// void printGen( Options & arguments );
-
 
 #endif
 
