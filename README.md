@@ -21,6 +21,27 @@ $ git clone https://github.com/Obelixlelul/canvas-life-game.git
 In root
 ```bash
 $ cmake -S . -Bbuild && cd build/
+$ make
 ````
+
+### Running
+
+Default running:
+```bash
+$ ./glife <initial_config_file.data>
+````
+check `data/` to see all config files.
+
+Options running:
+```bash
+$ ./glife --help
+````
+Show the `help` menu with you want some extra options.
+
+### Authorship
+* Tiago Onofre
+* Rafael Fortunato
+
+
 
 
