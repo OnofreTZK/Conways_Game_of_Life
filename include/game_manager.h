@@ -131,6 +131,11 @@ class GameManager
                 stateMachine = STABLE;
             }
 
+            if( isEXTINCT() )
+            {
+                stateMachine = EXTINCT;
+            }
+
             addTo_HashTable();
         }
 
@@ -144,13 +149,18 @@ class GameManager
 
         virtual bool game_over( void )
         {
-            if( stateMachine == STOP ){ return true; }
+            if( cfg.firstMan.maxgen != 0 )
+            {
+                if( cfg.genNumber == cfg.firstMan.maxgen ){ return true; }
+            }
+            else if( cfg.firstMan.maxgen == 0 )
+            {
+                if( stateMachine == STOP ){ return true; }
 
-            if( stateMachine == STABLE ){ return true; }
+                if( stateMachine == STABLE ){ return true; }
 
-            if( cfg.genNumber == cfg.firstMan.maxgen ){ return true; }
-
-            if( isEXTINCT() ){ return true; }
+                if( stateMachine == EXTINCT ){ return true; }
+            }
 
             return false;
 
