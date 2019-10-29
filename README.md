@@ -12,8 +12,15 @@ Every cell interacts with its eight neighbours, which are the cells that are hor
 4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 5. Births and deaths occur simultaneously.
 
-# Compile
-clone the repository
+## Compile
+Clone the repository
 ```bash
 $ git clone https://github.com/Obelixlelul/canvas-life-game.git
 ```
+
+In root
+```bash
+$ cmake -S . -Bbuild && cd build/
+````
+
+
