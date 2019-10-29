@@ -104,7 +104,7 @@ class GameManager
                 std::cout << "\n\x1b[32m[ OK ]\x1b[0m Get data \n";
 
                 cfg.assign( arguments ); // passing all data from options.
-                
+
                 system("mkdir ../output");
             }
             else
@@ -125,7 +125,7 @@ class GameManager
                 for(auto i : cfg.firstMan.coordinates){
                    image.pixel(Point2{(int)i.first,(int)i.second}, color_pallet["red"]); 
                 }
-                
+
                 //Stream to write name for encode_png
                 std::ostringstream temp_name;
                 temp_name << "../output/";
@@ -134,12 +134,10 @@ class GameManager
                 temp_name << ".png";
 
                 // const char * name = strcat(cfg.firstMan.outfile2, char_internal_generation);
-              
+
                 encode_png(temp_name.str().c_str(), image.pixels(), image.col(), image.row());
                 // std::cout << temp_name.str().c_str() << std::endl;
                 temp_name.str("");
-                        
-            
             }
             else
 
@@ -158,6 +156,11 @@ class GameManager
                 stateMachine = STABLE;
             }
 
+            if( isEXTINCT () )
+            {
+                stateMachine = EXTINCT;
+            }
+
             addTo_HashTable();
         }
 
@@ -171,13 +174,18 @@ class GameManager
 
         virtual bool game_over( void )
         {
-            if( stateMachine == STOP ){ return true; }
+            if( cfg.firstMan.maxgen == 0 )
+            {
+                if( stateMachine == STOP ){ return true; }
 
-            if( stateMachine == STABLE ){ return true; }
+                if( stateMachine == STABLE ){ return true; }
 
-            if( cfg.genNumber == cfg.firstMan.maxgen ){ return true; }
-
-            if( isEXTINCT() ){ return true; }
+                if( stateMachine == EXTINCT ){ return true; }
+            }
+            else if( cfg.genNumber == cfg.firstMan.maxgen )
+            {
+                 return true;
+            }
 
             return false;
 

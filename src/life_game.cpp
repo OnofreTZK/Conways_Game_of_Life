@@ -147,7 +147,7 @@ void LifeConfig::RenderCharTable(std::vector<std::vector<char>> &myCharVector)
 
 void LifeConfig::PrintTable()
 {
-  std::cout << "\n\n";
+  std::cout << "\nGeneration: " << genNumber << "\n";
 
   for( int i = 0; i < firstMan.nLin; i++ )
   {
