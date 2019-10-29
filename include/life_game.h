@@ -13,6 +13,8 @@
 #include <algorithm>
 #include <utility>
 
+#include "common.h"
+
 //==========================================================================================
 // Variables for options.
 //==========================================================================================
@@ -22,9 +24,10 @@ struct Options
     size_t maxgen =0;                                      // number of generations.
     size_t fps;                                         // generations presented per second.
     size_t pixel_size = 5;                              // cell size in image( pixel size ). >>DEFAULT = 5.
-    std::string bkgcolor = "GREEN";                     // background color name. >>DEFAULT = GREEN.
-    std::string alivecolor = "RED";                             // alive cells color name. >>DEFAULT = RED.
+    life::Color bkgcolor = life::GREEN;                       // background color name. >>DEFAULT = GREEN.
+    life::Color alivecolor = life::RED;                             // alive cells color name. >>DEFAULT = RED.
     std::string outfile;                                // filename for representation of the simulation.
+    char * outfile2;
     std::string configFile;                             // initial config filename.
     size_t nLin;                                        // number of rows( config ).
     size_t nCol;                                        // number of columns( config ).
@@ -71,7 +74,8 @@ class LifeConfig
         void RefreshGeneration(); // update generation
         void RenderCharTable(std::vector<std::vector<char>> &myCharVector); // update vector
         void printNeighboursTable();
-        void writeFile( std::string filename, size_t genNumber, std::string dirpath ); // create file.
+        void writeFile( std::string filename, size_t genNumber ); // create file.
+        void writePng( std::string filename, size_t genNumber );
 };
 
 } // namespace life

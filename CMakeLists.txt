@@ -9,11 +9,10 @@ set (CMAKE_CXX_STANDARD 14)
 
 #However, the file (Glob...) allows for wildcard additions:
 set(SOURCES src/lodepng.cpp src/driver_canvas.cpp)
-set(SOURCESLIFE src/mainselan.cpp src/arguments.cpp src/life_game.cpp )
+set(SOURCESLIFE src/mainselan.cpp src/arguments.cpp src/life_game.cpp src/lodepng.cpp)
 
 #file(GLOB SOURCES "src/*.cpp")
 
-add_executable(canvas ${SOURCES})
 add_executable(glife ${SOURCESLIFE})
 
 

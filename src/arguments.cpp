@@ -1,4 +1,5 @@
 #include "../include/arguments.h"
+#include "../include/common.h"
 
 // print help menu.
 void printHelp()
@@ -142,17 +143,18 @@ bool processing_arguments( Options & arguments, int argc, char *argv[] )
 
             if( strcmp( argv[i], "--bkgcolor" ) == 0 )
             {
-                arguments.bkgcolor = argv[i+1];
+                arguments.bkgcolor = life::color_pallet[argv[i+1]];
             }
 
             if( strcmp( argv[i], "--alivecolor" ) == 0 )
             {
-                arguments.alivecolor = argv[i+1];
+                arguments.alivecolor = life::color_pallet[argv[i+1]];
             }
 
             if( strcmp( argv[i], "--outfile" ) == 0 )
             {
                 arguments.outfile = argv[i+1];
+                arguments.outfile2 = argv[i+1];
             }
 
 

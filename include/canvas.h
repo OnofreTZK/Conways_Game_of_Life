@@ -9,6 +9,7 @@ using std::vector;
 #include <iomanip>
 
 #include "common.h"
+#include "lodepng.h"
 
 namespace life
 {
@@ -46,6 +47,7 @@ private:
     // TODO: If you wish to use a 3D matrix instead of an array, this is where
     // you should replace the vector with the 3D matrix.
     vector<vector<life::Color>> m_pixels; //!< The pixels, stored as 4 RGBA components.
+    //movi para dentro da funcao
     vector<component_t> m_pixel_unidimensional;
 
 public:
@@ -102,7 +104,7 @@ public:
     /*!
              * @param The color we assign to all pixels.
              */
-    void clear(const Color& choosed_color = BLACK)
+    void clear(const Color& choosed_color = GREEN)
     {
         for (int i = 0; i < m_row; ++i)
         {
@@ -165,6 +167,8 @@ public:
     { 
         int count{0};
         int progress{0};
+        // vector<component_t> m_pixel_unidimensional;
+        
 
         for(int i = 0; i < m_row; i++){
             for(int j = 0; j < m_col; j++){
@@ -231,14 +235,25 @@ public:
         Point2 n_point;
         
         //change origin from left top to left bottom
-        n_point.x = (m_row / m_block_size) - 1 - point.x;
+        // n_point.x = (m_row / m_block_size) - 1 - point.x;
 
-        n_point.x = n_point.x * m_block_size;
+        n_point.x = point.x * m_block_size;
         n_point.y = point.y * m_block_size;
 
         return n_point;
     }
 };
+
+void encode_png(const char* filename, const unsigned char * image, unsigned width, unsigned height)
+{
+    
+    //Encode the image
+    unsigned error = lodepng::encode(filename, image, width, height);
+
+    //if there's an error, display it
+    if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
+}
+
 } // namespace life
 
 #endif // CANVAS_H
