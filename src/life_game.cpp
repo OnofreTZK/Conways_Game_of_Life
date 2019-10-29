@@ -126,6 +126,8 @@ void LifeConfig::RenderCharTable(std::vector<std::vector<char>> &myCharVector)
 {
   aliveCells = 0;
 
+  firstMan.coordinates.clear();
+
   for(int i = 0; i < myCharVector.size(); i++)
   {
       for(int j = 0; j < myCharVector[i].size(); j++)
@@ -134,6 +136,7 @@ void LifeConfig::RenderCharTable(std::vector<std::vector<char>> &myCharVector)
           {
               aliveCells++; // increment to verify the extinction.
               myCharVector[i][j] = firstMan.aliveCell;
+              firstMan.coordinates.push_back( std::make_pair( i, j ) );
           }else{
               myCharVector[i][j] = ' ';
           }

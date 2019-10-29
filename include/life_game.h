@@ -54,6 +54,7 @@ class LifeConfig
 
     public:
         /* Must be access by the rest of program.  */
+        size_t hashKey;
         Options firstMan;
         size_t aliveCells;
         size_t genNumber =1; // generation ID.

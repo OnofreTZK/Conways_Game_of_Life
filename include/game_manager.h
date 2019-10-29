@@ -1,6 +1,7 @@
 #ifndef GAME_MNG_H
 #define GAME_MNG_H
-#include <unordered_set>
+#include <map> // std::map
+#include <functional> // std::hash
 #include <chrono> // time
 #include <thread> // thread control
 
@@ -12,6 +13,8 @@
 #define EXTINCT 3
 #define STOP 4
 
+
+typedef std::map< size_t, size_t > genSet;
 /*!
  *  Define a game manager interface that implements the game loop.
  */
@@ -34,7 +37,10 @@ class GameManager
         // options data.
         Options arguments;
 
+        // Hash Table.
+        genSet hashTable;
 
+        // Destructor.
         virtual ~GameManager(){}
 
         bool isEXTINCT()
@@ -43,6 +49,45 @@ class GameManager
 
             return false;
         }
+
+        /*------------------------------ HASH TABLE -------------------------------*/
+
+        // transform coordinates in a string.
+        std::string generateString( std::vector< std::pair<size_t,size_t> > & coords )
+        {
+            std::stringstream oss;
+
+            // vector >> stringstream
+            for( int i = 0; i < coords.size(); i++)
+            {
+                oss << coords[i].first << " " << coords[i].second << " ";
+            }
+
+            // stringstream to string.
+
+            return oss.str();
+
+        }
+
+
+        void hashFunction()
+        {
+           std::hash< std::string> hasher;
+
+           cfg.hashKey = hasher(generateString( cfg.firstMan.coordinates ) );
+        }
+
+        void addTo_HashTable()
+        {
+            hashTable[cfg.hashKey] = cfg.genNumber;
+        }
+
+        bool isSTABLE()
+        {
+            return hashTable.count( cfg.hashKey ) == 1;
+        }
+        //=============================================================================
+
 
         // processing arguments and getting data.
         virtual void initialize( int argc, char *argv[] )
@@ -53,7 +98,7 @@ class GameManager
 
                 cfg.assign( arguments ); // passing all data from options.
 
-                system("mkdir output");
+                system("mkdir ../output");
             }
             else
             {
@@ -78,6 +123,15 @@ class GameManager
         virtual void update()
         {
             cfg.RefreshGeneration();
+
+            hashFunction();
+
+            if( isSTABLE() )
+            {
+                stateMachine = STABLE;
+            }
+
+            addTo_HashTable();
         }
 
         // Thread speed control.
@@ -91,6 +145,8 @@ class GameManager
         virtual bool game_over( void )
         {
             if( stateMachine == STOP ){ return true; }
+
+            if( stateMachine == STABLE ){ return true; }
 
             if( cfg.genNumber == cfg.firstMan.maxgen ){ return true; }
 
