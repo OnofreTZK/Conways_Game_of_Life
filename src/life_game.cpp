@@ -182,13 +182,18 @@ void LifeConfig::printNeighboursTable(){
 }
 
 
-void LifeConfig::writeFile( std::string filename, size_t genNumber )
+void LifeConfig::writeFile( std::string filename, size_t genNumber, std::string dirpath )
 {
     std::string genNum = std::to_string( genNumber );
 
     std::ofstream outFile;
 
-    outFile.open("../output/"+filename+"_"+genNum+".txt");
+    if( dirpath != "" )
+    {
+        outFile.open("../"+dirpath+"/"+filename+"_"+genNum+".txt");
+    }
+    else
+        outFile.open("../output/"+filename+"_"+genNum+".txt");
 
     outFile << "\n\n";
 

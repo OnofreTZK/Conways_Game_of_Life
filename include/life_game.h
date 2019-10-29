@@ -71,7 +71,7 @@ class LifeConfig
         void RefreshGeneration(); // update generation
         void RenderCharTable(std::vector<std::vector<char>> &myCharVector); // update vector
         void printNeighboursTable();
-        void writeFile( std::string filename, size_t genNumber ); // create file.
+        void writeFile( std::string filename, size_t genNumber, std::string dirpath ); // create file.
 };
 
 } // namespace life

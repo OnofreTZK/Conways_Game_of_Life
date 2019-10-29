@@ -112,7 +112,7 @@ class GameManager
             // canvas must be here.
             if( cfg.firstMan.outfile != "" )
             {
-                cfg.writeFile( cfg.firstMan.outfile, cfg.genNumber );
+                cfg.writeFile( cfg.firstMan.outfile, cfg.genNumber, cfg.firstMan.imgdirpath );
             }
             else
 
