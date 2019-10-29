@@ -36,7 +36,7 @@ Options running:
 ```bash
 $ ./glife --help
 ````
-Show the `help` menu with you want some extra options.
+To see extra running options
 
 ### Authorship
 * Tiago Onofre
