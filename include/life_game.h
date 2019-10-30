@@ -72,9 +72,9 @@ class LifeConfig
         void PrintTable();
         void RenderNeighbours(); // count alive neighbours.
         void RefreshGeneration(); // update generation
-        void RenderCharTable(std::vector<std::vector<char>> &myCharVector); // update vector
+        void RenderCharTable(std::vector<std::vector<char>> &myCharVector); // update vector config
         void printNeighboursTable();
-        void writeFile( std::string filename, size_t genNumber ); // create file.
+        void writeFile( std::string filename, size_t genNumber, std::string dirpath ); // create file.
         void writePng( std::string filename, size_t genNumber );
 };
 

@@ -119,7 +119,7 @@ class GameManager
             // canvas must be here.
             if( cfg.firstMan.outfile != "" )
             {
-                // cfg.writeFile( cfg.firstMan.outfile, cfg.genNumber );
+                cfg.writeFile( cfg.firstMan.outfile, cfg.genNumber, cfg.firstMan.imgdirpath );
                 Canvas image(cfg.firstMan.nCol, cfg.firstMan.nLin, 50);
                 image.clear(cfg.firstMan.bkgcolor);
                 for(auto i : cfg.firstMan.coordinates){
@@ -176,11 +176,19 @@ class GameManager
         {
             if( cfg.firstMan.maxgen == 0 )
             {
+                if( stateMachine == EXTINCT )
+                {
+                    std::cout << "\nGeneration status: \x1b[31mEXTINCT\x1b[0m\n";
+                    return true; 
+                }
+
+                if( stateMachine == STABLE )
+                {
+                    std::cout << "\nGeneration status: \x1b[36mSTABLE\x1b[0m\n";
+                    return true; 
+                }
+
                 if( stateMachine == STOP ){ return true; }
-
-                if( stateMachine == STABLE ){ return true; }
-
-                if( stateMachine == EXTINCT ){ return true; }
             }
             else if( cfg.genNumber == cfg.firstMan.maxgen )
             {

@@ -106,7 +106,8 @@ bool processing_arguments( Options & arguments, int argc, char *argv[] )
                         arguments.configFile = argv[i];
 
                         readFile( arguments );
-                    }
+
+                    } /* ------ check final position of argv ------ */
                     else if( ( filename_verification( *argv[i] ) == false ) and ( i == argc - 1 ) )
                     {
                         // non valid file.
@@ -119,6 +120,17 @@ bool processing_arguments( Options & arguments, int argc, char *argv[] )
                     }
                 }
             }
+
+            // checking value after a --option.
+            if( ( argv[i][0] == '-' ) and ( argv[i][1] == '-') ) // checking options.
+            {
+                if( ( strcmp( argv[i+1], "" ) == 0 ) or ( ( argv[i+1][0] == '-' ) and ( argv[i+1][1] == '-') ) )
+                {
+                    std::cout << "\n\x1b[93mInvalid value for option\x1b[0m: " << argv[i] << "\n";
+                    return false;
+                }
+            }
+
 
 
             if( strcmp( argv[i], "--imgdir" ) == 0 )

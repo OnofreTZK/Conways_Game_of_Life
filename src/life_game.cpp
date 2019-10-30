@@ -182,13 +182,21 @@ void LifeConfig::printNeighboursTable(){
 }
 
 
-void LifeConfig::writeFile( std::string filename, size_t genNumber )
+void LifeConfig::writeFile( std::string filename, size_t genNumber, std::string dirpath )
 {
     std::string genNum = std::to_string( genNumber );
 
     std::ofstream outFile;
 
-    outFile.open("../output/"+filename+"_"+genNum+".txt");
+    if( dirpath == "" )
+    {
+        outFile.open("../output/"+filename+"_"+genNum+".txt");
+    }
+    if( dirpath !=  ""  )
+    {
+        outFile.open("../"+dirpath+"/"+filename+"_"+genNum+".txt");
+    }
+
 
     outFile << "\n\n";
 
@@ -210,31 +218,5 @@ void LifeConfig::writeFile( std::string filename, size_t genNumber )
   outFile.close();
 }
 
-// void LifeConfig::writePng( std::string filename, size_t genNumber )
-// {
-//     std::string genNum = std::to_string( genNumber );
-
-//     std::ofstream outFile;
-
-//     encode_png("../output/"+filename+"_"+genNum+".png", image.pixels(), image.col(), image.row() );
-//     outFile << "\n\n";
-
-//     for( int i = 0; i < firstMan.nLin; i++ )
-//     {
-//         outFile << "[";
-
-//         for( int j = 0; j < firstMan.nCol; j++ )
-//         {
-//             if( firstManChars[i][j] != firstMan.aliveCell )
-//             {
-//                 outFile << " ";
-//             }
-//             else
-//                 outFile << firstManChars[i][j];
-//         }
-//         outFile << "]" << std::endl;
-//   }
-//   outFile.close();
-// }
 //*END NAMESPACE LIFE*//
 } // namespace life
