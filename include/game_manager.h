@@ -84,7 +84,7 @@ class GameManager
            cfg.hashKey = hasher(generateString( cfg.firstMan.coordinates ) );
         }
 
-        // Add gen associating to haskey generated
+        // Add gen and linking with generated hashkey
         void addTo_HashTable()
         {
             hashTable[cfg.hashKey] = cfg.genNumber;
