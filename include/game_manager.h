@@ -76,14 +76,15 @@ class GameManager
 
         }
 
-
+        // Generate hashkey
         void hashFunction()
         {
-           std::hash< std::string> hasher;
+           std::hash< std::string > hasher;
 
            cfg.hashKey = hasher(generateString( cfg.firstMan.coordinates ) );
         }
 
+        // Add gen associating to haskey generated
         void addTo_HashTable()
         {
             hashTable[cfg.hashKey] = cfg.genNumber;
