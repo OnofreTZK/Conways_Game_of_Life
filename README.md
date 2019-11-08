@@ -40,7 +40,7 @@ To see extra running options
 
 ### Authorship
 * Tiago Onofre
-* Rafael Fortunato
+* [Rafael Fortunato](https://github.com/Obelixlelul)
 
 
 
