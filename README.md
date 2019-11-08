@@ -38,7 +38,7 @@ $ ./glife --help
 ````
 To see extra running options
 
-### Authorship
+## Authorship
 * [Tiago Onofre](https://github.com/OnofreTZK)
 * [Rafael Fortunato](https://github.com/Obelixlelul)
 
