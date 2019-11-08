@@ -30,7 +30,7 @@ Default running:
 ```bash
 $ ./glife <initial_config_file.data>
 ````
-check `data/` to see all config files.
+Check directory `data/` to see all config files.
 
 Options running:
 ```bash
