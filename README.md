@@ -39,7 +39,7 @@ $ ./glife --help
 To see extra running options
 
 ### Authorship
-* Tiago Onofre
+* [Tiago Onofre](https://github.com/OnofreTZK)
 * [Rafael Fortunato](https://github.com/Obelixlelul)
 
 
