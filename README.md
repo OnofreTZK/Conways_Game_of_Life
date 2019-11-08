@@ -1,6 +1,6 @@
 # Conway's Life Game Simulator
 ## About the project
-`Cellular automata` implementation in `C++` using class and game loop pattern.
+`Cellular Automata` implementation in `C++` using class and game loop pattern.
 
 The game is a zero-player game, the evolution is determined by a pattern. One interacts with the Game of Life by creating an initial configuration and observing how it evolves.
 ## Rules
