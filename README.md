@@ -28,7 +28,7 @@ $ make
 
 Default running:
 ```bash
-$ ./glife <initial_config_file.data>
+$ ./glife <initial_config_file.dat>
 ````
 Check directory `data/` to see all config files.
 
