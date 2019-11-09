@@ -15,7 +15,7 @@ Every cell interacts with its eight neighbours, which are the cells that are hor
 ## Compile
 Clone the repository
 ```bash
-$ git clone https://github.com/Obelixlelul/canvas-life-game.git
+$ git clone https://github.com/OnofreTZK/Conways-LifeGame
 ```
 
 In root
