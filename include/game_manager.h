@@ -106,7 +106,6 @@ class GameManager
 
                 cfg.assign( arguments ); // passing all data from options.
 
-                system("mkdir ../output");
             }
             else
             {
@@ -129,7 +128,7 @@ class GameManager
 
                 //Stream to write name for encode_png
                 std::ostringstream temp_name;
-                temp_name << "../output/";
+                temp_name << "../"+cfg.firstMan.imgdirpath+"/";
                 temp_name << cfg.firstMan.outfile2;
                 temp_name << std::to_string(cfg.genNumber).c_str();
                 temp_name << ".png";

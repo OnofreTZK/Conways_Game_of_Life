@@ -200,13 +200,23 @@ void readFile( Options & arguments )
     //Config Variables
     //===========================================================================================
 
-    inFile >> arguments.nLin;
-    inFile >> arguments.nCol;
+    std::string buffer; // buffering each line
+    std::stringstream ss; // parser
+
+    while( std::getline( inFile, buffer ) )
+    {
+        ss << buffer << std::endl;
+    }
+
+    inFile.close();
+
+    ss >> arguments.nLin >> arguments.nCol;
 
     std::cout << ">>>Grid size read from input file: "
               << arguments.nLin << " rows by " << arguments.nCol << " cols.\n";
 
-    inFile >> arguments.aliveCell;
+    ss >> arguments.aliveCell;
+
     std::cout << ">>>Character that represents a living cell from input file: '" 
               << arguments.aliveCell << "'.\n";
     //===========================================================================================
@@ -216,25 +226,25 @@ void readFile( Options & arguments )
     arguments.starter_config.resize( arguments.nLin, mat_col );
     //========================================================
 
-    std::string buffer;
 
     /* Parser to get alive cells positions */
-    for( int i = 0; i < arguments.nLin; i++ )
+    for( int i{0}; i < arguments.nLin; i++ )
     {
-        std::getline( inFile, buffer ); // pass to a string.
-
-        for( int j = 0; j < arguments.nCol; j++ )
+        for( int j{0}; j < arguments.nCol; j++ )
         {
-            if( buffer[j] == arguments.aliveCell ) // processing each char of the string.
+            if( ss.peek() == ' ' or ss.peek() == '\n' )
             {
-                arguments.starter_config[i][j] = buffer[j];
+                ss.get();
+            }
+
+            ss >> arguments.starter_config[i][j];
+
+            if( arguments.starter_config[i][j] == arguments.aliveCell ) // processing each char of the string.
+            {
                 arguments.coordinates.push_back( std::make_pair( i, j ) );
             }
         }
-
     }
-
-    inFile.close();
 
 }
 
