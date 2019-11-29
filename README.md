@@ -30,7 +30,7 @@ Default running:
 ```bash
 $ ./glife <initial_config_file.dat>
 ````
-Check directory `data/` to see all config files.
+Check directory [`data/`](https://github.com/OnofreTZK/Conways_Game_of_life/tree/master/data) to see all config files.
 
 To see extra running options
 ```bash
