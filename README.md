@@ -1,4 +1,4 @@
-# Conway's Life Game Simulator
+# Conway's Game of Life Simulator
 ## About the project
 `Cellular Automata` implementation in `C++` using class and game loop pattern.
 
