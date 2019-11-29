@@ -32,11 +32,11 @@ $ ./glife <initial_config_file.dat>
 ````
 Check directory `data/` to see all config files.
 
-Options running:
+To see extra running options
 ```bash
 $ ./glife --help
 ````
-To see extra running options
+
 
 ## Authorship
 * [Tiago Onofre](https://github.com/OnofreTZK)
