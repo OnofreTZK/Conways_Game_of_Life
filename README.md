@@ -37,6 +37,8 @@ To see extra running options
 $ ./glife --help
 ````
 
+## Limitations
+In due to a bad choice of image data structure, the png generating is compromised! I strongly recommend run the simulation in terminal
 
 ## Authorship
 * [Tiago Onofre](https://github.com/OnofreTZK)
