@@ -167,9 +167,15 @@ class GameManager
         // Thread speed control.
         virtual void process_events()
         {
-            size_t duration = 1000/cfg.firstMan.fps;
+            size_t duration;
 
-            std::this_thread::sleep_for( std::chrono::milliseconds( duration ) );
+            if( cgf.firstMan.fps > 0 )
+            {
+                duration =  1000/cfg.firstMan.fps;
+
+                std::this_thread::sleep_for( std::chrono::milliseconds( duration ) );
+            }
+
         }
 
         virtual bool game_over( void )
