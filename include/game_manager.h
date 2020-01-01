@@ -169,7 +169,7 @@ class GameManager
         {
             size_t duration;
 
-            if( cgf.firstMan.fps > 0 )
+            if( cfg.firstMan.fps > 0 )
             {
                 duration =  1000/cfg.firstMan.fps;
 
