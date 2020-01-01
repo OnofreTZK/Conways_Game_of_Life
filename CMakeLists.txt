@@ -18,4 +18,4 @@ add_executable(glife ${SOURCESLIFE})
 
 #To create cmake inside the build folder when its not working in tradicional methods
 #cmake -S . -Bbuild
-
+#testing
